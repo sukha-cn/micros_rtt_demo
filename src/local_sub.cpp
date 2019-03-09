@@ -30,7 +30,7 @@ string num_to_str(int n)//整数变字符串
     return ss.str();
 }
 
-void chatterCallback(const std_msgs::String::ConstPtr& msg)
+void chatterCallback(std_msgs::String msg)
 {
 	long long t = getCurrentTime();
 	//int pos=str.find('A');
@@ -38,8 +38,8 @@ void chatterCallback(const std_msgs::String::ConstPtr& msg)
 	//int num=msg->data;
 	//ROS_INFO("I heard: [%d]", num);
 
-	std::string str=msg->data;
-	//ROS_INFO("I heard: [%s]", str.c_str());
+	std::string str=msg.data;
+	ROS_INFO("I heard: [%s]", str.c_str());
 
 	string filename="rtt_local_interprocess_"+num_to_str(str.size())+"_sub.txt";
 	if(!outfile.is_open ())
@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 	ROS_INFO("begin to sub.\n");
 	//ros::Subscriber sub= n.subscribe("message", 1000, chatterCallback);
 
-	//micros_rtt::Subscriber sub= n.subscribe("message", 1000, chatterCallback);
+	micros_rtt::Subscriber sub= n.subscribe("message", 1000, chatterCallback);
 	ros::spin();
 
 	return 0;

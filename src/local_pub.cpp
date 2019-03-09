@@ -93,7 +93,7 @@ int main(int argc, char **argv)
 	bool ok = ros::param::get(PARAM_NAME,msg_size);
 	if(!ok) {
 		ROS_FATAL_STREAM("Could not get parameter msg_size") ;
-		exit (1) ;
+		msg_size = 10;
 	}
 
 	string str=anylengthstr(msg_size);
